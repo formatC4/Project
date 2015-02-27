@@ -13,7 +13,8 @@ public class Game
 
     public Game()
     {
-
+        players = new ArrayList<Player>();
+        steps = new ArrayList<Step>();
     }
 
     public void init()
@@ -26,7 +27,7 @@ public class Game
 
     }
 
-    public  void createGame(Enum e,int numAI,int numPlayer)
+    public  void createGame(int level,int numAI,int numPlayer)
     {
 
     }

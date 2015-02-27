@@ -1,8 +1,9 @@
 package com.company;
 
-/**
- * Created by nagypeter on 15. 02. 26..
- */
+import java.awt.*;
+import java.util.Date;
+
+
 public class Human extends Player {
 
     public Human()
@@ -10,8 +11,8 @@ public class Human extends Player {
 
     }
 
-    public  Step step(){
-        return null;
+    public  Step step(Point newPoint){
+        return new Step(null,new Date(),this,newPoint);
     }
     public  boolean changeDirection(){
         return  true;

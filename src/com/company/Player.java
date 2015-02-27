@@ -11,15 +11,13 @@ public abstract class Player
     protected boolean isDead;
     protected int speed;
     protected int slideCount;
-    protected Step prevStep;
+    protected Point prevLocation;
+    protected int numStep;
 
-    public abstract Step step();
+    public abstract Step step(Point newPoint);
     public abstract boolean changeDirection();
 
-    public void  setPrevStep(Step s)
-    {
-        this.prevStep = s;
-    }
+    public void  setPrevStep(Point prevLocation) { this.prevLocation = prevLocation; }
 
     public void setLocation(Point p)
     {
@@ -41,11 +39,12 @@ public abstract class Player
         return this.speed;
     }
 
-    public  int setSpeed(int speed)
+    public  void setSpeed(int speed)
     {
         this.speed = speed;
     }
 
+    public void setNumSpeed(int numStep){ this.numStep = numStep; }
 
     public boolean isDead()
     {
@@ -55,6 +54,11 @@ public abstract class Player
     public int getNumOil()
     {
         return this.numOil;
+    }
+
+    public void kill()
+    {
+        this.isDead = true;
     }
 
 }

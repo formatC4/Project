@@ -11,15 +11,20 @@ public class Map
 
     public Map()
     {
-
+        map = new java.util.HashMap<Point, Component>();
     }
 
     private void load()
     {
 
     }
-    private void setComponent()
+    private void setComponent(Component c)
     {
+        
+    }
 
+    private Component getComponent(Point p)
+    {
+        return map.get(p);
     }
 }

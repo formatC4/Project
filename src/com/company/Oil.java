@@ -1,16 +1,21 @@
 package com.company;
 
-/**
- * Created by nagypeter on 15. 02. 26..
- */
+
 public class Oil extends Component
 {
-    public  boolean steppedOnMe()
+
+    public Oil()
     {
-        return true;
-    };
-    public  boolean amISteppeble()
+        this.stepable = true;
+    }
+
+    public  void steppedOnMe(Player p)
     {
-        return true;
-    };
+
+    }
+
+    public  boolean getStepable()
+    {
+        return this.stepable;
+    }
 }

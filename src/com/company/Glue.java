@@ -1,16 +1,20 @@
 package com.company;
 
-/**
- * Created by nagypeter on 15. 02. 26..
- */
+
 public class Glue extends Component
 {
-    public  boolean steppedOnMe()
+    public Glue()
     {
-        return true;
-    };
-    public  boolean amISteppeble()
+        this.stepable = true;
+    }
+
+    public  void steppedOnMe(Player p)
     {
-        return true;
-    };
+
+    }
+
+    public  boolean getStepable()
+    {
+        return this.stepable;
+    }
 }
