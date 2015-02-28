@@ -18,7 +18,7 @@ public class Map
     {
 
     }
-    private void setComponent(Component c)
+    private void setComponent(Point p,Component c)
     {
         
     }
