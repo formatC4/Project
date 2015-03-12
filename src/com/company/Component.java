@@ -9,5 +9,8 @@ public abstract class Component
     protected Image icon;
 
     public abstract void steppedOnMe(Step step);
-    public abstract boolean getStepable();
+
+    public  boolean getStepable(){
+        return this.stepable;
+    }
 }

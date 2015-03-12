@@ -8,13 +8,12 @@ public class Hole extends Component
         this.stepable = true;
     }
 
-    public  void steppedOnMe(Player p)
+    public  void steppedOnMe(Step p)
     {
-
+        Human player = (Human)p.getPlayer();
+        System.out.println("Lyukba esett: " + player.getName() + p.getTo());
+        player.setNumStep(player.getNumStep()+1);
+        player.kill();
     }
 
-    public  boolean getStepable()
-    {
-        return this.stepable;
-    }
 }

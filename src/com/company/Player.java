@@ -5,7 +5,7 @@ import java.awt.*;
 public abstract class Player
 {
     protected Point location;
-    protected Image icon; //majd példány contructorban setteljük
+    protected Image icon;
     protected int numGlue;
     protected int numOil;
     protected boolean isDead;
@@ -14,47 +14,77 @@ public abstract class Player
     protected Point prevLocation;
     protected int numStep;
 
-    public abstract Step step(Point newPoint);
-    public abstract boolean changeDirection();
+    public abstract Step step();
 
-    public void  setPrevStep(Point prevLocation) { this.prevLocation = prevLocation; }
-
-    public void setLocation(Point p)
-    {
-        this.location = p;
+    public int getNumGlue() {
+        return numGlue;
     }
 
-    public int getNumGlue()
-    {
-        return this.numGlue;
+    public void setNumGlue(int numGlue) {
+        this.numGlue = numGlue;
     }
 
-    public int getSlideCount()
-    {
-        return this.slideCount;
+    public Point getLocation() {
+        return location;
     }
 
-    public  int getSpeed()
-    {
-        return this.speed;
+    public void setLocation(Point location) {
+        this.location = location;
     }
 
-    public  void setSpeed(int speed)
-    {
+    public Image getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Image icon) {
+        this.icon = icon;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
-    public void setNumSpeed(int numStep){ this.numStep = numStep; }
+    public int getSlideCount() {
+        return slideCount;
+    }
+
+    public void setSlideCount(int slideCount) {
+        this.slideCount = slideCount;
+    }
+
+    public Point getPrevLocation() {
+        return prevLocation;
+    }
+
+    public void setPrevLocation(Point prevLocation) {
+        this.prevLocation = prevLocation;
+    }
+
+    public int getNumStep() {
+        return numStep;
+    }
+
+    public void setNumStep(int numStep) {
+        this.numStep = numStep;
+    }
+
+    public int getNumOil() {
+        return numOil;
+    }
+
+    public void setNumOil(int numOil) {
+        this.numOil = numOil;
+    }
 
     public boolean isDead()
     {
         return this.isDead;
     }
 
-    public int getNumOil()
-    {
-        return this.numOil;
-    }
 
     public void kill()
     {

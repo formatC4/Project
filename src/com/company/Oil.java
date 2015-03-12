@@ -9,13 +9,17 @@ public class Oil extends Component
         this.stepable = true;
     }
 
-    public  void steppedOnMe(Player p)
+    public  void steppedOnMe(Step p)
     {
-
+        Human player = (Human)p.getPlayer();
+        System.out.println("Olajba léptek: " + player.getName() + p.getTo());
+        player.setPrevLocation(player.getLocation());
+        player.setLocation(p.getTo());
+        System.out.println("Duplázódott a speedje");
+        player.setSpeed(player.getSpeed() * 2);
+        player.setNumStep(player.getNumStep()+1);
+        player.setSlideCount(3);
+        player.setNumGlue(player.getNumOil()+1);
     }
 
-    public  boolean getStepable()
-    {
-        return this.stepable;
-    }
 }

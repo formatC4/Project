@@ -30,12 +30,10 @@ public class Step
 
     public Step(Component component,Date time,Player player,Point to)
     {
-
-    }
-
-    public void put()
-    {
-
+        this.component = component;
+        this.time = time;
+        this.player = player;
+        this.to = to;
     }
 
 }

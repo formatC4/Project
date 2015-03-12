@@ -7,13 +7,10 @@ public class Wall extends Component
         this.stepable = false;
     }
 
-    public  void steppedOnMe(Player p)
+    public  void steppedOnMe(Step p)
     {
-
+        Human player = (Human)p.getPlayer();
+        System.out.println("Falra lépnék, de nem tudok: " + player.getName() + p.getTo());
     }
 
-    public  boolean getStepable()
-    {
-        return this.stepable;
-    }
 }

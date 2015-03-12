@@ -1,34 +1,54 @@
 package com.company;
 
+import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by nagypeter on 15. 02. 26..
- */
+
 public class Game
 {
     private Map map;
     private ArrayList<Player> players;
     private ArrayList<Step> steps;
 
+    private boolean isRunning;
+
+
+
     public Game()
     {
-        players = new ArrayList<Player>();
-        steps = new ArrayList<Step>();
+        init();
     }
 
     public void init()
     {
-
+        players = new ArrayList<Player>();
+        steps = new ArrayList<Step>();
+        map = new Map();
+        isRunning = true;
     }
 
     public  void update()
     {
-
+        while (isRunning)
+        {
+            for(Player player : players)
+            {
+                Step currentStep = player.step();
+                Component currentCmp = map.getComponent(currentStep.getTo());
+                Point whereToPutComponent = new Point(currentStep.getPlayer().getLocation());
+                if (currentCmp.getStepable())
+                    currentCmp.steppedOnMe(currentStep);
+                if(currentStep.getComponent() != null)map.setComponent(whereToPutComponent,currentStep.getComponent());
+                map.draw(players.get(0).getLocation(),players.get(1).getLocation());
+            }
+        }
     }
 
-    public  void createGame(int level,int numAI,int numPlayer)
+    public  void createGame(int level)
     {
-
+        map.load(level);
+        players.add(new Human("Player 1"));
+        players.add(new Human("Player 2"));
+        update();
     }
 }
