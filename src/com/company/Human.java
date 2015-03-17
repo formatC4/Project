@@ -12,7 +12,7 @@ public class Human extends Player {
 
     public Human(String name)
     {
-        this.name = name +" "+ this.hashCode();
+        this.name = name +" #"+ this.hashCode();
         this.setNumOil(3);
         this.setNumGlue(3);
         this.setSpeed(4);
@@ -31,6 +31,12 @@ public class Human extends Player {
             slideCount--;
             int x = location.x - prevLocation.x;
             int y = location.y - prevLocation.y;
+            System.out.println("x: "+x+" y: "+y);
+            if( x < 0 || y < 0)
+            {
+                this.kill();
+                return null;
+            }
             return new Step(null,new Date(),this,new Point(location.x+x,location.y+y));
         }
 

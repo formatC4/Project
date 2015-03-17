@@ -36,4 +36,9 @@ public class Step
         this.to = to;
     }
 
+    public void setComponent(Component cmp)
+    {
+        this.component = cmp;
+    }
+
 }

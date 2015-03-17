@@ -18,8 +18,9 @@ public class Oil extends Component
         System.out.println("Duplázódott a speedje");
         player.setSpeed(player.getSpeed() * 2);
         player.setNumStep(player.getNumStep()+1);
-        player.setSlideCount(3);
-        player.setNumGlue(player.getNumOil()+1);
+        player.setSlideCount(player.getSpeed());
+        player.setNumOil(player.getNumOil()+1);
+
     }
 
 }

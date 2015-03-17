@@ -34,11 +34,20 @@ public class Game
             for(Player player : players)
             {
                 Step currentStep = player.step();
+                if(currentStep == null && player.isDead())
+                {
+                    System.out.println(((Human)player).getName()+" veszített");
+                    isRunning = false;
+                    break;
+                }
                 Component currentCmp = map.getComponent(currentStep.getTo());
                 Point whereToPutComponent = new Point(currentStep.getPlayer().getLocation());
                 if (currentCmp.getStepable())
                     currentCmp.steppedOnMe(currentStep);
-                if(currentStep.getComponent() != null)map.setComponent(whereToPutComponent,currentStep.getComponent());
+                if(currentStep.getComponent() != null)
+                    map.setComponent(whereToPutComponent,currentStep.getComponent());
+                else
+                    map.setComponent(whereToPutComponent,new Ground());
                 map.draw(players.get(0).getLocation(),players.get(1).getLocation());
             }
         }
