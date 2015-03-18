@@ -2,7 +2,9 @@ package com.company;
 
 import java.awt.*;
 
-
+/**
+ * 
+ */
 public abstract class Component
 {
     protected boolean stepable;

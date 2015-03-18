@@ -1,5 +1,4 @@
 package com.company;
-//>
 import java.awt.*;
 import java.util.Date;
 import java.util.Scanner;
@@ -31,8 +30,7 @@ public class Human extends Player {
             slideCount--;
             int x = location.x - prevLocation.x;
             int y = location.y - prevLocation.y;
-            System.out.println("x: "+x+" y: "+y);
-            if( x < 0 || y < 0)
+            if( location.x+x < 0 ||location.y+y < 0 || location.x+x > 30 || location.y+y > 30 )
             {
                 this.kill();
                 return null;
@@ -41,7 +39,7 @@ public class Human extends Player {
         }
 
         Scanner sc = new Scanner(System.in);
-        System.out.println(name+" ("+location+") Merre lépnél? (le-S,fel-W,jobbra-A,balra-D");
+        System.out.println(name+" ("+location+") Merre lépnél? (le-S,fel-W,jobbra-D,balra-A");
         char dir = sc.next().toUpperCase().toCharArray()[0];
         System.out.println("Ha szeretnél letenni valamit: (olaj-O,ragacs-R,semmi-Bármi)");
         char cmp = sc.next().toUpperCase().toCharArray()[0];
