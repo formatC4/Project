@@ -3,7 +3,9 @@ package com.company;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**
+ * A Game osztály a játék "karmestere", ő hozza létre a szükséges objektumokat, illetve vezényli le a köztük lévő interakciókat
+ */
 public class Game
 {
     private Map map;
@@ -13,12 +15,18 @@ public class Game
     private boolean isRunning;
 
 
-
+    /**
+     * A Game osztály konstruktora, meghívja az inicializáló metódust
+     */
     public Game()
     {
         init();
     }
 
+
+    /**
+     * Az init metódus inicializálja a szükséges adatstruktúrákat, alapértelmezett értéket állít be a használt ciklusváltozóknak
+     */
     public void init()
     {
         players = new ArrayList<Player>();
@@ -27,6 +35,9 @@ public class Game
         isRunning = true;
     }
 
+    /**
+     * Az update metódus ciklikusan halad végig a játékosokon és dolgozza fel a felhasználói input-ot és azok alapján koordinálja a játékot
+     */
     public  void update()
     {
         while (isRunning)
@@ -53,6 +64,11 @@ public class Game
         }
     }
 
+    /**
+     * A függvény a felhasználó által kért játéknehézséget továbpasszolja a map load() metódusának, hogy kezdeményezze a kért nehézségű pálya betöltését.
+     * Továbbá létrehozza a játékosokat, majd elindítja a játékciklust.
+     * @param level - int
+     */
     public  void createGame(int level)
     {
         map.load(level);

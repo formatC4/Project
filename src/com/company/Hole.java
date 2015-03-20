@@ -1,13 +1,19 @@
 package com.company;
 
-
+/**
+ * A Lyuk pályaelem oszálya
+ */
 public class Hole extends Component
 {
-    public Hole()
-    {
-        this.stepable = true;
-    }
+    /**
+     *A konstruktor beállít egy booleant, a lyuk elem léphető.
+     */
+    public Hole(){ this.stepable = true; }
 
+    /**
+     * Növeli a lépészámot, majd "megöli" a játékost.
+     * @param p - Step
+     */
     public  void steppedOnMe(Step p)
     {
         Human player = (Human)p.getPlayer();

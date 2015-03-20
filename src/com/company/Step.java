@@ -3,7 +3,9 @@ package com.company;
 import java.awt.*;
 import java.util.Date;
 
-
+/**
+ * A Step osztályban regisztráljuk az egyes játékosok következő lépését és használni kívánt pályaelemét
+ */
 public class Step
 {
     private Component component;

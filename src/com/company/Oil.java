@@ -1,14 +1,23 @@
 package com.company;
 
-
+/**
+ * Az Olaj pályaelem osztálya
+ */
 public class Oil extends Component
 {
-
+    /**
+     * A konstruktor beállít egy boolean-t, az olaj elem léphető
+     */
     public Oil()
     {
         this.stepable = true;
     }
 
+    /**
+     * Beállítja a játékos pozícióját, majd megkétszerezi a sebességét,letiltja adott számú lépéstől a sebesség függvényében (csúszás)
+     * Továbbá menedzseli a játékos olaj tartalékát és növeli a lépésszámot
+     * @param p - Step
+     */
     public  void steppedOnMe(Step p)
     {
         Human player = (Human)p.getPlayer();

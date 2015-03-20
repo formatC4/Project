@@ -2,6 +2,9 @@ package com.company;
 
 import java.awt.*;
 
+/**
+ * Játékos ősosztály biztosítja a megfelelő tulajdonságot és setter/gettereket a Human örökös számára
+ */
 public abstract class Player
 {
     protected Point location;

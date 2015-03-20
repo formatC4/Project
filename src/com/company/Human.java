@@ -3,12 +3,18 @@ import java.awt.*;
 import java.util.Date;
 import java.util.Scanner;
 
-
+/**
+ * A játékos leszármazott osztálya
+ */
 public class Human extends Player {
 
     private String name;
     private static int numberOfPlayers = 0;
 
+    /**
+     * A Konstruktor inicializálja a játékos tulajdonságait
+     * @param name - String
+     */
     public Human(String name)
     {
         this.name = name +" #"+ this.hashCode();
@@ -24,7 +30,11 @@ public class Human extends Player {
     }
 
 
-
+    /**
+     * Ez a metódust felel a játékos következő pozíciójának a kiszámolásáért a felhasználói input függvényében, illetve itt regisztrálódik a használni kívánt pályaelem.
+     * A metódus visszaad egy teljesen beállított Step objektumot.
+     * @return Step
+     */
     public  Step step(){
         if(slideCount > 0){
             slideCount--;
