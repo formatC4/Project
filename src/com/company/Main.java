@@ -3,7 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
-
+/*EZ ITT EGY KOMMENT VIKTOR TÖRÖLD KI */
 public class Main {
 
     public static void main(String[] args) {
