@@ -3,18 +3,16 @@ import java.awt.*;
 import java.util.Date;
 import java.util.Scanner;
 
-/**
- * A játékos leszármazott osztálya
- */
+
 public class Human extends Player {
 
-    private String name;
     private static int numberOfPlayers = 0;
+    protected int numStep;
+    protected int slideCount;
+    protected int numGlue;
+    protected int numOil;
+    private int ID;
 
-    /**
-     * A Konstruktor inicializálja a játékos tulajdonságait
-     * @param name - String
-     */
     public Human(String name)
     {
         this.name = name +" #"+ this.hashCode();
@@ -26,26 +24,55 @@ public class Human extends Player {
             this.setLocation(new Point(0,0));
         else
             this.setLocation(new Point(30,30));
+        ID = numberOfPlayers;
         numberOfPlayers++;
+        this.isRobot = true;
+    }
+    public int getID(){return this.ID;}
+
+    public int getNumStep() {
+        return numStep;
     }
 
+    public void setNumStep(int numStep) {
+        this.numStep = numStep;
+    }
 
-    /**
-     * Ez a metódust felel a játékos következő pozíciójának a kiszámolásáért a felhasználói input függvényében, illetve itt regisztrálódik a használni kívánt pályaelem.
-     * A metódus visszaad egy teljesen beállított Step objektumot.
-     * @return Step
-     */
-    public  Step step(){
+    public int getNumOil() {
+        return numOil;
+    }
+
+    public void setNumOil(int numOil) {
+        this.numOil = numOil;
+    }
+
+    public int getNumGlue() {
+        return numGlue;
+    }
+
+    public void setNumGlue(int numGlue) {
+        this.numGlue = numGlue;
+    }
+
+    public int getSlideCount() {
+        return slideCount;
+    }
+
+    public void setSlideCount(int slideCount) {
+        this.slideCount = slideCount;
+    }
+
+    public  Jump step(){
         if(slideCount > 0){
             slideCount--;
             int x = location.x - prevLocation.x;
             int y = location.y - prevLocation.y;
-            if( location.x+x < 0 ||location.y+y < 0 || location.x+x > 30 || location.y+y > 30 )
+            if( location.x+x < 0 ||location.y+y < 0 || location.x+x > 30 || location.y+y > 30 ) /*majd ha körberaktunk lyukkal a mapot törölhetjük*/
             {
                 this.kill();
                 return null;
             }
-            return new Step(null,new Date(),this,new Point(location.x+x,location.y+y));
+            return new Jump(null,Game.getInstance().getTime(),this,new Point(location.x+x,location.y+y));
         }
 
         Scanner sc = new Scanner(System.in);
@@ -73,17 +100,14 @@ public class Human extends Player {
         Component comp = null;
         switch (cmp)
         {
-            case 'O': if(numOil > 0) {comp = new Oil(); this.numOil--;}
+            case 'O': if(numOil > 0) {comp = new Oil(to); this.numOil--;}
                 break;
-            case 'R': if(numGlue > 0) {comp = new Glue(); this.numGlue--;}
+            case 'R': if(numGlue > 0) {comp = new Glue(to); this.numGlue--;}
                 break;
         }
-        return new Step(comp,new Date(),this,to);
+        return new Jump(comp,Game.getInstance().getTime(),this,to);
     }
 
-    public String getName()
-    {
-        return this.name;
-    }
+
 
 }

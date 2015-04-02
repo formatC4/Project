@@ -1,23 +1,17 @@
 package com.company;
 
-/**
- * A talan pályaelem osztálya
- */
+
+import java.awt.*;
+
 public class Ground extends Component
 {
-    /**
-     * A konstruktor beállít egy boolean-t, a talaj elem léphető
-     */
-    public Ground()
+    public Ground(Point location)
     {
+        this.location = location;
         this.stepable = true;
     }
 
-    /**
-     * Beállítja a játékos pozícióját, növeli a lépésszámot.
-     * @param p - Step
-     */
-    public  void steppedOnMe(Step p)
+    public  void steppedOnMe(Jump p)
     {
         Human player = (Human)p.getPlayer();
         System.out.println("Új position: " + player.getName() + p.getTo());

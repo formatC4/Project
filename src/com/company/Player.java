@@ -9,23 +9,16 @@ public abstract class Player
 {
     protected Point location;
     protected Image icon;
-    protected int numGlue;
-    protected int numOil;
     protected boolean isDead;
     protected int speed;
-    protected int slideCount;
+    protected boolean isRobot;
     protected Point prevLocation;
-    protected int numStep;
+    protected String name;
 
-    public abstract Step step();
 
-    public int getNumGlue() {
-        return numGlue;
-    }
+    public abstract Jump step();
 
-    public void setNumGlue(int numGlue) {
-        this.numGlue = numGlue;
-    }
+
 
     public Point getLocation() {
         return location;
@@ -51,13 +44,7 @@ public abstract class Player
         this.speed = speed;
     }
 
-    public int getSlideCount() {
-        return slideCount;
-    }
 
-    public void setSlideCount(int slideCount) {
-        this.slideCount = slideCount;
-    }
 
     public Point getPrevLocation() {
         return prevLocation;
@@ -67,31 +54,21 @@ public abstract class Player
         this.prevLocation = prevLocation;
     }
 
-    public int getNumStep() {
-        return numStep;
-    }
 
-    public void setNumStep(int numStep) {
-        this.numStep = numStep;
-    }
-
-    public int getNumOil() {
-        return numOil;
-    }
-
-    public void setNumOil(int numOil) {
-        this.numOil = numOil;
-    }
 
     public boolean isDead()
     {
         return this.isDead;
     }
-
+    public boolean isRobot() {return this.isRobot;}
 
     public void kill()
     {
         this.isDead = true;
     }
 
+    public String getName()
+    {
+        return this.name;
+    }
 }

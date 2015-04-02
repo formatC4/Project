@@ -1,25 +1,19 @@
 package com.company;
 
-/**
- * A Lyuk pályaelem oszálya
- */
+
+import java.awt.*;
+
 public class Hole extends Component
 {
-    /**
-     *A konstruktor beállít egy booleant, a lyuk elem léphető.
-     */
-    public Hole(){ this.stepable = true; }
-
-    /**
-     * Növeli a lépészámot, majd "megöli" a játékost.
-     * @param p - Step
-     */
-    public  void steppedOnMe(Step p)
+    public Hole(Point location)
     {
-        Human player = (Human)p.getPlayer();
-        System.out.println("Lyukba esett: " + player.getName() + p.getTo());
-        player.setNumStep(player.getNumStep()+1);
-        player.kill();
+        this.location = location;
+        this.stepable = true;
+    }
+    public  void steppedOnMe(Jump p)
+    {
+        System.out.println("Lyukba esett: " + p.getPlayer().getName() + p.getTo());
+        p.getPlayer().kill();
     }
 
 }

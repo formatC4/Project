@@ -12,12 +12,12 @@ public class Main {
 
     public Main()
     {
-        Game game = new Game();
+
         System.out.println("Milyen nehézségű játékot szeretnél?(1-3)");
 
         Scanner sc = new Scanner(System.in);
         int lvl = sc.nextInt();
-        game.createGame(lvl);
+        Game.getInstance().createGame(lvl);
     }
 
 }

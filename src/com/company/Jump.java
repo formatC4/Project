@@ -3,13 +3,11 @@ package com.company;
 import java.awt.*;
 import java.util.Date;
 
-/**
- * A Step osztályban regisztráljuk az egyes játékosok következő lépését és használni kívánt pályaelemét
- */
-public class Step
+
+public class Jump
 {
     private Component component;
-    private Date time;
+    private int time;
     private Player player;
     private Point to;
 
@@ -21,7 +19,7 @@ public class Step
         return player;
     }
 
-    public Date getTime() {
+    public int getTime() {
         return time;
     }
 
@@ -30,7 +28,7 @@ public class Step
     }
 
 
-    public Step(Component component,Date time,Player player,Point to)
+    public Jump(Component component,int time,Player player,Point to)
     {
         this.component = component;
         this.time = time;

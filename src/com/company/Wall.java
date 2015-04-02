@@ -1,26 +1,17 @@
 package com.company;
 
-/**
- * A fal pályaelem oszálya
- */
+import java.awt.*;
+
 public class Wall extends Component
 {
-    /**
-     *A konstruktor beállít booleant, a fal nem elem léphető.
-     */
-    public Wall()
+    public Wall(Point location)
     {
+        this.location = location;
         this.stepable = false;
     }
-
-    /**
-     *A lépés hatására nem történik semmi
-     * @param p - Step
-     */
-    public  void steppedOnMe(Step p)
+    public  void steppedOnMe(Jump p)
     {
-        Human player = (Human)p.getPlayer();
-        System.out.println("Falra lépnék, de nem tudok: " + player.getName() + p.getTo());
+        System.out.println("Falra lépnék, de nem tudok: " + p.getPlayer().getName() + p.getTo());
     }
 
 }
