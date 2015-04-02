@@ -100,7 +100,9 @@ public class Human extends Player {
         Component comp = null;
         switch (cmp)
         {
-            case 'O': if(numOil > 0) {comp = new Oil(to); this.numOil--;}
+            case 'O':
+                if(numOil > 0) {comp = new Oil(to); this.numOil--; Game.getInstance().addOil((Oil)comp);
+                }
                 break;
             case 'R': if(numGlue > 0) {comp = new Glue(to); this.numGlue--;}
                 break;

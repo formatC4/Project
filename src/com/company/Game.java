@@ -70,6 +70,7 @@ public class Game
             }
             globalTime++;/* új kör #yolo*/
             oilUpdate();
+            WallELauncher();
         }
         for (Player p : players)
             if(!p.isDead() && p.isRobot)
@@ -78,7 +79,15 @@ public class Game
 
     public void WallELauncher()
     {
-
+        if(globalTime % 5 > 2 && !oilList.isEmpty())
+        {
+            WallE w1 = new WallE("Takker1");
+            WallE w2 = new WallE("Takker2");
+            w1.setLocation(new Point(30,0));
+            w1.setLocation(new Point(0,30));
+            players.add(w1);
+            players.add(w2);
+        }
 
     }
 
@@ -132,6 +141,7 @@ public class Game
                         if(isAnybodyThere(actualJumps.get(i).getTo()) == null)
                             executeJump(actualJumps.get(i));
                         actualJumps.get(j).getPlayer().kill();
+                        map.setComponent(actualJumps.get(j).getPlayer().getLocation(),new Oil(actualJumps.get(j).getPlayer().getLocation()));
                         jumps.remove(actualJumps.get(j));
                         actualJumps.remove(j);
                     }
@@ -172,6 +182,7 @@ public class Game
                     {
                         p.kill();
                         executeJump(j);
+                        map.setComponent(p.getLocation(),new Oil(p.getLocation()));
                     }
                     else
                     {
@@ -190,8 +201,9 @@ public class Game
     private void removeDeadWallEs()
     {
         for(Player p : players)
-            if(!p.isRobot() && p.isDead())
+            if(!p.isRobot() && p.isDead()) {
                 players.remove(p);
+            }
     }
 
     private Player isAnybodyThere(Point location)
@@ -206,16 +218,21 @@ public class Game
 
     public void oilUpdate()
     {
-        for (Oil o : oilList)
-            o.tick();
+        if(!oilList.isEmpty())
+            for(int i = 0;i<oilList.size();i++)
+                 oilList.get(i).tick();
     }
 
     public void terminateObject(Component obj)
     {
-        map.setComponent(obj.location,new Ground(obj.location));
-        for (Oil o : oilList)
-            if(o.location.equals(obj.location))
-                oilList.remove(o);
+        map.setComponent(obj.location, new Ground(obj.location));
+        if(!oilList.isEmpty()) {
+            for(int i = 0;i<oilList.size();i++)
+                if (oilList.get(i).location.equals(obj.location)) {
+                    oilList.remove(oilList.get(i));
+                    break;
+                }
+        }
     }
 
     public  void createGame(int level)
@@ -245,5 +262,5 @@ public class Game
     {
         return oilList;
     }
-
+    public void addOil(Oil o) {this.oilList.add(o);}
 }
