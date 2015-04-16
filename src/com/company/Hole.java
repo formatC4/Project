@@ -16,4 +16,8 @@ public class Hole extends Component
         p.getPlayer().kill();
     }
 
+    public String toString()
+    {
+        return "Hole";
+    }
 }

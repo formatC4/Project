@@ -65,6 +65,7 @@ public abstract class Player
     public void kill()
     {
         this.isDead = true;
+        Game.getInstance().terminatePlayer(this);
     }
 
     public String getName()

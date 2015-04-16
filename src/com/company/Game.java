@@ -38,13 +38,33 @@ public class Game
         isRunning = true;
     }
 
+    public void debug()
+    {
+        System.out.println("--------------------------------------------------");
+        System.out.println("gt: "+globalTime);
+        System.out.println("LÉPÉSEK SZÁMA: " + jumps.size());
+        for (Jump j : jumps)
+            System.out.println(j);
+        System.out.println("PLAYEREK SZAMA: " + players.size());
+        for (Player p:players)
+            System.out.println(p);
+
+        System.out.println("OILOK SZAMA: " + oilList.size());
+        for (Oil o:oilList)
+            System.out.println(o);
+        System.out.println("--------------------------------------------------");
+
+    }
+
     public  void update()
     {
         while (isRunning)
         {
-
-            for(Player player : players)
+            System.out.println("????????????????????????????????");
+            debug();
+            for(int i=0;i<players.size();i++)
             {
+                Player player = players.get(i);
                 boolean hasJump = false;
                 for (Jump j : jumps)
                     if(player == j.getPlayer())
@@ -59,11 +79,13 @@ public class Game
                         jumps.add(currentJump);
                 }
             }
+            debug();
             collisionTest();
+            debug();
             map.draw(players);
-            for(Player p : players)
+            for(int i=0;i<players.size();i++)
             {
-                if(p.isDead() && p.isRobot()) {
+                if(players.get(i).isDead() && players.get(i).isRobot()) {
                     isRunning = false;
                     break;
                 }
@@ -79,12 +101,13 @@ public class Game
 
     public void WallELauncher()
     {
-        if(globalTime % 5 > 2 && !oilList.isEmpty())
+        //if(globalTime % 5 > 1 && !oilList.isEmpty())
+        if (globalTime==2)
         {
             WallE w1 = new WallE("Takker1");
             WallE w2 = new WallE("Takker2");
-            w1.setLocation(new Point(30,0));
-            w1.setLocation(new Point(0,30));
+            w1.setLocation(new Point(7,0));
+            w2.setLocation(new Point(0,5));
             players.add(w1);
             players.add(w2);
         }
@@ -98,6 +121,7 @@ public class Game
 
     private void collisionTest()
     {
+        System.out.println("#######################################################");
         ArrayList<Jump> actualJumps = new ArrayList<Jump>();
         for (Jump jump : jumps)
             if(jump.getTime()+jump.getPlayer().getSpeed() == globalTime)
@@ -113,6 +137,7 @@ public class Game
                     {
                         if(maxSpeed-actualJumps.get(i).getPlayer().getSpeed() < maxSpeed-actualJumps.get(j).getPlayer().getSpeed())
                         {
+                            System.out.println("Robot-robottal ütközés "+actualJumps.get(i).getPlayer().getName()+"-ra "+actualJumps.get(j).getPlayer().getName());
                             actualJumps.get(i).getPlayer().kill();
                             jumps.remove(actualJumps.get(i));
                             actualJumps.remove(i);
@@ -121,6 +146,8 @@ public class Game
                         }
                         else
                         {
+                            System.out.println("Robot-robottal ütközés "+actualJumps.get(j).getPlayer().getName()+"-ra "+actualJumps.get(i).getPlayer().getName());
+
                             actualJumps.get(j).getPlayer().kill();
                             jumps.remove(actualJumps.get(j));
                             actualJumps.remove(j);
@@ -130,6 +157,8 @@ public class Game
                     }
                     else if((!actualJumps.get(i).getPlayer().isRobot() && actualJumps.get(j).getPlayer().isRobot()))
                     {
+                        System.out.println("Takker-robottal ütközés "+actualJumps.get(i).getPlayer().getName()+"-ra "+actualJumps.get(j).getPlayer().getName());
+
                         if(isAnybodyThere(actualJumps.get(j).getTo()) == null)
                             executeJump(actualJumps.get(j));
                         actualJumps.get(i).getPlayer().kill();
@@ -138,6 +167,8 @@ public class Game
                     }
                     else if((actualJumps.get(i).getPlayer().isRobot() && !actualJumps.get(j).getPlayer().isRobot()))
                     {
+                        System.out.println("Takker-robottal ütközés "+actualJumps.get(j).getPlayer().getName()+"-ra "+actualJumps.get(i).getPlayer().getName());
+
                         if(isAnybodyThere(actualJumps.get(i).getTo()) == null)
                             executeJump(actualJumps.get(i));
                         actualJumps.get(j).getPlayer().kill();
@@ -147,6 +178,8 @@ public class Game
                     }
                     else
                     {
+                        System.out.println("Takker-takkerral ütközés "+actualJumps.get(i).getPlayer().getName()+"-ra "+actualJumps.get(j).getPlayer().getName());
+
                         if(isAnybodyThere(actualJumps.get(i).getTo()) == null)
                             executeJump(jumps.get(i));
                         Jump jmp = jumps.get(j);
@@ -160,35 +193,43 @@ public class Game
                     }
 
                 }
-        for(Player p : players)
+        for(int i=0;i<players.size();i++)
         {
-            for (Jump j : actualJumps)
+            Player p = players.get(i);
+            for (int l=0;l<jumps.size();l++)
             {
+                Jump j = jumps.get(l);
                 if(p.location.equals(j.getTo()))
                 {
                     if(p.isRobot() && j.getPlayer().isRobot())
                     {
+                        System.out.println("robot-robotra ugrik " + players.get(i).getName() + "-ra " + jumps.get(l).getPlayer().getName());
                         p.kill();
                         executeJump(j);
+                        break;
                     }
                     else if(p.isRobot() && !j.getPlayer().isRobot())
                     {
+                        System.out.println("takker-robotra ugrik "+players.get(i).getName()+"-ra "+jumps.get(l).getPlayer().getName());
+
                         Point to = new Point(j.getPlayer().getPrevLocation());
                         Jump tempJump = new Jump(j.getComponent(),Game.getInstance().getTime(),j.getPlayer(),to);
                         executeJump(tempJump);
                         jumps.remove(j);
+                        break;
                     }
                     else if(!p.isRobot() && j.getPlayer().isRobot())
                     {
+                        System.out.println("robot-takkerre ugrik "+players.get(i).getName()+"-ra "+jumps.get(l).getPlayer().getName());
+
                         p.kill();
                         executeJump(j);
                         map.setComponent(p.getLocation(),new Oil(p.getLocation()));
+                        break;
                     }
                     else
                     {
-                        Point to = new Point(j.getPlayer().getPrevLocation());
-                        Jump tempJump = new Jump(j.getComponent(),Game.getInstance().getTime(),j.getPlayer(),to);
-                        executeJump(tempJump);
+                        System.out.println("takker-takkerre ugrik "+players.get(i).getName()+"-ra "+jumps.get(l).getPlayer().getName());
                         jumps.remove(j);
                     }
                 }
@@ -196,6 +237,7 @@ public class Game
         }
         for (Jump j : actualJumps)
             executeJump(j);
+        System.out.println("#######################################################");
     }
 
     private void removeDeadWallEs()
@@ -221,6 +263,17 @@ public class Game
         if(!oilList.isEmpty())
             for(int i = 0;i<oilList.size();i++)
                  oilList.get(i).tick();
+    }
+
+    public void terminatePlayer(Player p)
+    {
+        if(!players.isEmpty()) {
+            for(int i = 0;i<players.size();i++)
+                if (players.get(i).getName().equals(p.getName())) {
+                    players.remove(players.get(i));
+                    break;
+                }
+        }
     }
 
     public void terminateObject(Component obj)
@@ -252,8 +305,6 @@ public class Game
             currentCmp.steppedOnMe(j);
         if(j.getComponent() != null)
             map.setComponent(whereToPutComponent,j.getComponent());
-        else
-            map.setComponent(whereToPutComponent,new Ground(whereToPutComponent));
 
         jumps.remove(j);
     }
@@ -262,5 +313,7 @@ public class Game
     {
         return oilList;
     }
+
+
     public void addOil(Oil o) {this.oilList.add(o);}
 }

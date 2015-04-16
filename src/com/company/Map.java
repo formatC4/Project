@@ -30,6 +30,8 @@ public class Map
 
     public Component getComponent(Point p)
     {
+        if (p.x < 0 || p.y < 0)
+            return new Hole(p);
         return map.get(p);
     }
 
@@ -40,7 +42,7 @@ public class Map
             for (int j = 0; j <= 30; j++) {
                 for (Player p : players)
                 {
-                    if(p.location.x == j && p.location.y == i)
+                    if(p.location.x == j && p.location.y == i && !p.isDead())
                     {
                         if(p.isRobot())
                         {
@@ -68,5 +70,6 @@ public class Map
             }
             System.out.println();
         }
+        System.out.println();
     }
 }

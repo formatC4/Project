@@ -41,4 +41,10 @@ public class Jump
         this.component = cmp;
     }
 
+
+    public String toString()
+    {
+        return player.getName()+"from: "+player.getLocation()+" to:"+to+" "+component+" "+time;
+    }
+
 }

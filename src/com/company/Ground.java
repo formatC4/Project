@@ -13,12 +13,19 @@ public class Ground extends Component
 
     public  void steppedOnMe(Jump p)
     {
-        Human player = (Human)p.getPlayer();
-        System.out.println("Új position: " + player.getName() + p.getTo());
-        player.setPrevLocation(player.getLocation());
-        player.setNumStep(player.getNumStep()+1);
-        player.setLocation(p.getTo());
+        System.out.println("Új pozíció: " + p.getPlayer().getName() + p.getTo());
+        p.getPlayer().setPrevLocation(p.getPlayer().getLocation());
+        p.getPlayer().setLocation(p.getTo());
+        if(p.getPlayer().isRobot())
+        {
+            Human player = (Human)p.getPlayer();
+            player.setNumStep(player.getNumStep()+1);
+        }
+    }
 
+    public String toString()
+    {
+        return "Ground";
     }
 
 }

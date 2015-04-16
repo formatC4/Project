@@ -14,4 +14,8 @@ public class Wall extends Component
         System.out.println("Falra lépnék, de nem tudok: " + p.getPlayer().getName() + p.getTo());
     }
 
+    public String toString()
+    {
+        return "Wall";
+    }
 }

@@ -23,7 +23,7 @@ public class Human extends Player {
         if(numberOfPlayers == 0)
             this.setLocation(new Point(0,0));
         else
-            this.setLocation(new Point(30,30));
+            this.setLocation(new Point(5,0));
         ID = numberOfPlayers;
         numberOfPlayers++;
         this.isRobot = true;
@@ -67,11 +67,11 @@ public class Human extends Player {
             slideCount--;
             int x = location.x - prevLocation.x;
             int y = location.y - prevLocation.y;
-            if( location.x+x < 0 ||location.y+y < 0 || location.x+x > 30 || location.y+y > 30 ) /*majd ha körberaktunk lyukkal a mapot törölhetjük*/
+            /*if( location.x+x < 0 ||location.y+y < 0 || location.x+x > 30 || location.y+y > 30 )
             {
                 this.kill();
                 return null;
-            }
+            }*/
             return new Jump(null,Game.getInstance().getTime(),this,new Point(location.x+x,location.y+y));
         }
 
@@ -96,20 +96,27 @@ public class Human extends Player {
             case 'D': if(location.x < 30)
                         to.x++;
                 break;
+            default: return null;
+
         }
         Component comp = null;
         switch (cmp)
         {
             case 'O':
-                if(numOil > 0) {comp = new Oil(to); this.numOil--; Game.getInstance().addOil((Oil)comp);
+                if(numOil > 0) {comp = new Oil(location); this.numOil--; Game.getInstance().addOil((Oil)comp);
                 }
                 break;
-            case 'R': if(numGlue > 0) {comp = new Glue(to); this.numGlue--;}
+            case 'R': if(numGlue > 0) {comp = new Glue(location); this.numGlue--;}
                 break;
         }
         return new Jump(comp,Game.getInstance().getTime(),this,to);
     }
 
+    @Override
+    public String toString()
+    {
+        return this.name+" "+this.isRobot+" "+this.isDead+" loc: "+this.location+" prevLoc: "+this.prevLocation+" speed: "+speed+" sc: "+slideCount;
+    }
 
 
 }
