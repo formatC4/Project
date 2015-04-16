@@ -64,6 +64,10 @@ public class Map
                         System.out.print("G");
                     else if(name.equals(Oil.class.getName()))
                         System.out.print("O");
+                    else if(name.equals(Hole.class.getName()))
+                        System.out.print("H");
+                    else if(name.equals(Wall.class.getName()))
+                        System.out.print("W");
                 }
                 foundP = false;
 
