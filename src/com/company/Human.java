@@ -21,9 +21,9 @@ public class Human extends Player {
         this.setSpeed(4);
         this.setNumStep(0);
         if(numberOfPlayers == 0)
-            this.setLocation(new Point(20,20));
-        else
             this.setLocation(new Point(10,10));
+        else
+            this.setLocation(new Point(20,20));
         ID = numberOfPlayers;
         numberOfPlayers++;
         this.isRobot = true;

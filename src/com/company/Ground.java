@@ -14,6 +14,13 @@ public class Ground extends Component
     {
         this.location = location;
         this.stepable = true;
+        try {
+
+            this.icon = ImageIO.read(new File("kepek/ground.png"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -31,13 +38,6 @@ public class Ground extends Component
             player.setNumStep(player.getNumStep()+1);
         }
 
-        try {
-
-            this.icon = ImageIO.read(new File("kepek/ground.png"));
-        }catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
     }
 
     public String toString()

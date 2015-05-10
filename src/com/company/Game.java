@@ -109,8 +109,8 @@ public class Game
     {
             WallE w1 = new WallE("Takker1");
             WallE w2 = new WallE("Takker2");
-            w1.setLocation(new Point(5,5));
-            w2.setLocation(new Point(25,25));
+            w1.setLocation(new Point(6,6));
+            w2.setLocation(new Point(23,23));
             players.add(w1);
             players.add(w2);
     }

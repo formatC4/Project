@@ -114,6 +114,7 @@ public class View {
         box.add(oil1);
         box.add(step1);
         box.add(speed1);
+        box.add(Box.createRigidArea(new Dimension(0,10) ));
         box.add(Player2);
         box.add(glue2);
         box.add(oil2);
@@ -137,43 +138,35 @@ public class View {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            boolean foundP = false;
+
             for (int i = 0;i<=30;i++) {
                 for (int j = 0; j <= 30; j++) {
 
-                    if(!foundP)
-                    {
                         Component cmp =  map.getComponent(new Point(j, i));
                         String name = cmp.getClass().getName();
                         if(name.equals(Ground.class.getName()))
                         {
-                            g.setColor(Color.green);
-                            g.fillRect(j * 20, i * 20, 20, 20);
+                            g.drawImage(cmp.getIcon(),(int)cmp.getLocation().getX()*20,(int)cmp.getLocation().getY()*20,20,20,null);
 
                         }
                         else if(name.equals(Glue.class.getName()))
                         {
-                            g.setColor(Color.red);
-                            g.fillRect(j * 20, i * 20, 20, 20);
+                            g.drawImage(cmp.getIcon(),(int)cmp.getLocation().getX()*20,(int)cmp.getLocation().getY()*20,20,20,null);
                         }
                         else if(name.equals(Oil.class.getName()))
                         {
-                            g.setColor(Color.black);
-                            g.fillRect(j * 20, i * 20, 20, 20);
+                            g.drawImage(cmp.getIcon(),(int)cmp.getLocation().getX()*20,(int)cmp.getLocation().getY()*20,20,20,null);
                         }
                         else if(name.equals(Hole.class.getName()))
                         {
-                            g.setColor(Color.blue);
-                            g.fillRect(j * 20, i * 20, 20, 20);
+                            g.drawImage(cmp.getIcon(),(int)cmp.getLocation().getX()*20,(int)cmp.getLocation().getY()*20,20,20,null);
                         }
                         else if(name.equals(Wall.class.getName()))
                         {
-                            g.setColor(Color.gray);
-                            g.fillRect(j * 20, i * 20, 20, 20);
+                            g.drawImage(cmp.getIcon(),(int)cmp.getLocation().getX()*20,(int)cmp.getLocation().getY()*20,20,20,null);
                         }
                     }
-                    foundP = false;
-                }
+
             }
             for (Player p : players)
             {

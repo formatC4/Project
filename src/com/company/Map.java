@@ -26,7 +26,7 @@ public class Map
                 map.put(new Point(i,j),new Ground(new Point(i,j)));
 
         switch (level) {
-            case 1:
+            case 0:
                 for (int i = 0; i <= 30; i++) {
                     if (i == 0 || i == 30)
                         for (int j = 0; j <= 30; j++) {
@@ -38,16 +38,40 @@ public class Map
                     }
                 }
                 break;
-            case 2: {
+            case 1:
                 for (int i = 13; i <= 16; i++) {
                     map.put(new Point(i, 13), new Hole(new Point(i, 13)));
                     map.put(new Point(i, 14), new Hole(new Point(i, 14)));
                     map.put(new Point(i, 15), new Hole(new Point(i, 15)));
                     map.put(new Point(i, 16), new Hole(new Point(i, 16)));
                 }
-            }
+                break;
+
+            case 2:
+                for (int i = 4; i <= 25; i++) {
+                        for (int j = 4; j <= 25; j++) {
+                            if((i == 4 || i == 25) &&(j<13 || j>17))
+                                map.put(new Point(i, j), new Wall(new Point(i, j)));
+
+
+                            if((j == 4 || j == 25) &&(i<13 || i>17))
+                                map.put(new Point(i, j), new Wall(new Point(i, j)));
+                        }
+                    }
+
+
+                for (int i = 13; i <= 16; i++) {
+                    map.put(new Point(i, 13), new Hole(new Point(i, 13)));
+                    map.put(new Point(i, 14), new Hole(new Point(i, 14)));
+                    map.put(new Point(i, 15), new Hole(new Point(i, 15)));
+                    map.put(new Point(i, 16), new Hole(new Point(i, 16)));
+                }
+                break;
         }
     }
+
+
+
     public void setComponent(Point p,Component c)
     {
         map.put(p,c);

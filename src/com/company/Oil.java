@@ -48,21 +48,21 @@ public class Oil extends Component
         {
             Human player = (Human)p.getPlayer();
             System.out.println("Duplázódott a speedje");
-            if(player.getSpeed() > 8)
+            if(player.getSpeed() > 1)
                 player.setSpeed(player.getSpeed() / 2);
             player.setNumStep(player.getNumStep()+1);
-            player.setSlideCount(player.getSpeed());
-            if(player.getNumOil() <3 )
+            player.setSlideCount(player.getSpeed()*2);
+            if(player.getNumOil() <5)
                 player.setNumOil(player.getNumOil()+1);
 
             if(player.getID() == 0)
             {
-                View.getInstance().setGlue1("Oil: "+player.getNumOil());
+                View.getInstance().setOil1("Oil: "+player.getNumOil());
                 View.getInstance().setSpeed1("Speed: "+player.getSpeed());
             }
             else
             {
-                View.getInstance().setGlue2("Oil: "+player.getNumOil());
+                View.getInstance().setOil2("Oil: "+player.getNumOil());
                 View.getInstance().setSpeed2("Speed: "+player.getSpeed());
             }
 

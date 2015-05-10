@@ -11,7 +11,7 @@ public class Main {
     public Main()
     {
 
-        Object[] options = {"Hard","Medium","Easy"};
+        Object[] options = {"Easy","Medium","Hard"};
         JFrame frame = new JFrame();
         int n = JOptionPane.showOptionDialog(frame,
                 "Válassz nehézséget",

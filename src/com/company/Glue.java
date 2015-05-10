@@ -34,7 +34,7 @@ public class Glue extends Component
         {
             Human player = (Human)p.getPlayer();
             System.out.println("Feleződött a speedje");
-            if(player.getSpeed()<8)
+            if(player.getSpeed()<16)
                 player.setSpeed(player.getSpeed()*2);
             player.setNumStep(player.getNumStep()+1);
             if(player.getNumGlue() <3 )

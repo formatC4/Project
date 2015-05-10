@@ -73,14 +73,25 @@ public class Controller {
         if(Game.getInstance().getPlayers().size() < 2)
             EndGame();
 
-        Game.getInstance().setGlobalTime(Game.getInstance().getTime()+1000);
+        Game.getInstance().setGlobalTime(Game.getInstance().getTime()+1);
         Game.getInstance().update();
         View.getInstance().Refresh();
 
-        if(Game.getInstance().getTime() % 10000 ==0)
-            View.getInstance().setGlobaTime("Global time: "+Integer.toString(Game.getInstance().getTime()/10000));
-        if(Game.getInstance().getTime() % 50000 == 0 && !Game.getInstance().getOilList().isEmpty() && Game.getInstance().getPlayers().size() == 2)
+
+            View.getInstance().setGlobaTime("Global time: "+Integer.toString(Game.getInstance().getTime()));
+        if(Game.getInstance().getTime() % 100 == 0 && !Game.getInstance().getOilList().isEmpty() && Game.getInstance().getPlayers().size() == 2)
             Game.getInstance().WallELauncher();
+        if(Game.getInstance().getTime() % 50 ==0)
+            for(Player p : Game.getInstance().getPlayers())
+            {
+                if(p.isRobot())
+                {
+                    if(((Human)p).getNumOil()<5)
+                    ((Human)p).setNumOil(((Human)p).getNumOil()+2);
+                    if(((Human)p).getNumGlue()<5)
+                    ((Human)p).setNumGlue(((Human) p).getNumGlue() + 2);
+                }
+            }
 
     }
 
