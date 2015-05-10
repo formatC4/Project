@@ -5,6 +5,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Az olaj pályaelem
+ */
 public class Oil extends Component
 {
 
@@ -23,6 +26,9 @@ public class Oil extends Component
         }
     }
 
+    /**
+     * Az olaj életciklusát csökkenti
+     */
     public void tick()
     {
         timeLeft--;
@@ -30,7 +36,9 @@ public class Oil extends Component
             Game.getInstance().terminateObject(this);
     }
 
-
+    /**
+     * Az olajralépő játékos sebessége duplázódik, és további adminisztratív feladatok
+     */
     public  void steppedOnMe(Jump p)
     {
         System.out.println("Olajba léptek: " + p.getPlayer().getName() + p.getTo());
@@ -44,14 +52,25 @@ public class Oil extends Component
                 player.setSpeed(player.getSpeed() / 2);
             player.setNumStep(player.getNumStep()+1);
             player.setSlideCount(player.getSpeed());
-            player.setNumOil(player.getNumOil()+1);
+            if(player.getNumOil() <3 )
+                player.setNumOil(player.getNumOil()+1);
+
+            if(player.getID() == 0)
+            {
+                View.getInstance().setGlue1("Oil: "+player.getNumOil());
+                View.getInstance().setSpeed1("Speed: "+player.getSpeed());
+            }
+            else
+            {
+                View.getInstance().setGlue2("Oil: "+player.getNumOil());
+                View.getInstance().setSpeed2("Speed: "+player.getSpeed());
+            }
+
         }
         else
         {
             timeLeft = 1;
         }
-
-
     }
 
     public String toString()

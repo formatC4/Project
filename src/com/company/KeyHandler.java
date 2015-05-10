@@ -2,11 +2,10 @@ package com.company;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 
 /**
- * Created by nagypeter on 15. 05. 07..
+ * A KeyHandler osztály figyeli a billentyűnyomásokat, és azokat pufferekben eltárolja későbbi használatra
  */
 public class KeyHandler implements KeyListener {
 
@@ -29,6 +28,9 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * A bemenetről kapott karaktereket a nekik megfelelő pufferekbe rakja, attól függően hogy az adott karakter melyik játékoshoz tartozik
+     */
     @Override
     public void keyPressed(KeyEvent e) {
 

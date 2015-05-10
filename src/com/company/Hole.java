@@ -5,6 +5,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Lyuk pályaelem
+ */
 public class Hole extends Component
 {
     public Hole(Point location)
@@ -19,6 +22,10 @@ public class Hole extends Component
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Játékos kivégzése lyukbaesés esetén
+     */
     public  void steppedOnMe(Jump p)
     {
         System.out.println("Lyukba esett: " + p.getPlayer().getName() + p.getTo());

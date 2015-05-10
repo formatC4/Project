@@ -11,9 +11,6 @@ public class Main {
     public Main()
     {
 
-
-
-
         Object[] options = {"Hard","Medium","Easy"};
         JFrame frame = new JFrame();
         int n = JOptionPane.showOptionDialog(frame,

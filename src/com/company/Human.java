@@ -2,10 +2,6 @@ package com.company;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Date;
-import java.util.Scanner;
 
 
 public class Human extends Player {
@@ -122,12 +118,33 @@ public class Human extends Player {
         switch (cmp)
         {
             case 'Q':
-                if(numOil > 0) {comp = new Oil(location); this.numOil--; Game.getInstance().addOil((Oil)comp);
+                if(numOil > 0)
+                {
+                    comp = new Oil(location);
+                    this.numOil--;
+                    Game.getInstance().addOil((Oil)comp);
+                    if(this.getID() == 0)
+                        View.getInstance().setOil1("Oil: "+this.numOil);
+                    else if(this.getID() == 1)
+                        View.getInstance().setOil2("Oil: " + this.numOil);
                 }
                 break;
-            case 'E': if(numGlue > 0) {comp = new Glue(location); this.numGlue--;}
+            case 'E': if(numGlue > 0)
+                {
+                    comp = new Glue(location);
+                    this.numGlue--;
+                    if(this.getID() == 0)
+                        View.getInstance().setGlue1("Glue: " + this.numGlue);
+                    else if(this.getID() == 1)
+                        View.getInstance().setGlue2("Glue: "+this.numGlue);
+                }
                 break;
         }
+        if(this.getID() == 0)
+            View.getInstance().setStep1("Steps: " + this.getNumStep());
+        else if(this.getID() == 1)
+            View.getInstance().setStep2("Steps: " + this.getNumStep());
+
         return new Jump(comp,Game.getInstance().getTime(),this,to);
     }
 

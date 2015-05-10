@@ -5,6 +5,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Talaj pályaelem
+ */
 public class Ground extends Component
 {
     public Ground(Point location)
@@ -13,6 +16,10 @@ public class Ground extends Component
         this.stepable = true;
     }
 
+    /**
+     *
+     * Lépészám növelése
+     */
     public  void steppedOnMe(Jump p)
     {
         System.out.println("Új pozíció: " + p.getPlayer().getName() + p.getTo());

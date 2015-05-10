@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Játékos ősosztály biztosítja a megfelelő tulajdonságot és setter/gettereket a Human örökös számára
+ * Játékos ősosztály biztosítja a megfelelő tulajdonságot és setter/gettereket a Human és WallE örökös számára
  */
 public abstract class Player
 {

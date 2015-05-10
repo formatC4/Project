@@ -4,14 +4,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 
+ * A komponens osztályból származnak az egyes pályaelemek
+ * Ő felel azokért a metódusokért,tulajdonságokért melyek mindegyik szármaoztt osztályban közösek
  */
 public abstract class Component
 {
     protected boolean stepable;
-
-
-
     protected BufferedImage icon;
     protected Point location;
 
@@ -22,7 +20,7 @@ public abstract class Component
         return this.stepable;
     }
 
-    public BufferedImage getIcon() {
+    public Image getIcon() {
         return icon;
     }
 

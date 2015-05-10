@@ -1,10 +1,13 @@
 package com.company;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Date;
 
-//<>
+/**
+ * A Game osztály a játék fő logikája, felel az ütközésekért, a játékosok és tereptárgyak nyilvántartásáért és életciklusáért
+ */
 public class Game
 {
     private Map map;
@@ -12,7 +15,6 @@ public class Game
     private ArrayList<Jump> jumps;
     private ArrayList<Oil> oilList;
     private static Game instance = null;
-    private boolean isRunning;
     private int globalTime;
     private final int maxSpeed = 8;
 
@@ -48,9 +50,8 @@ public class Game
         jumps = new ArrayList<Jump>();
         oilList = new ArrayList<Oil>();
         map = new Map();
-        isRunning = true;
     }
-
+    //TODO véglegesből kivenni
     public void debug()
     {
         System.out.println("--------------------------------------------------");
@@ -69,10 +70,12 @@ public class Game
 
     }
 
+    /**
+     * A függvény lépteti a robotokat "körönként", illetve menedzseli az olajok életciklusát
+     */
     public  void update()
     {
-            System.out.println("????????????????????????????????");
-            debug();
+            //debug();
             for(int i=0;i<players.size();i++)
             {
                 Player player = players.get(i);
@@ -90,34 +93,26 @@ public class Game
                         jumps.add(currentJump);
                 }
             }
-            debug();
+            //debug();
             collisionTest();
-            debug();
-            map.draw(players);
-            for(int i=0;i<players.size();i++)
-            {
-                if(players.get(i).isDead() && players.get(i).isRobot()) {
-                    isRunning = false;
-                    break;
-                }
-            }
+           // debug();
+            //map.draw(players);
             oilUpdate();
 
 
     }
 
-
+    /**
+     * Elhelyez a pályán két takarító robotot
+     */
     public void WallELauncher()
     {
-
             WallE w1 = new WallE("Takker1");
             WallE w2 = new WallE("Takker2");
             w1.setLocation(new Point(5,5));
             w2.setLocation(new Point(25,25));
             players.add(w1);
             players.add(w2);
-
-
     }
 
     public int getTime()
@@ -127,9 +122,12 @@ public class Game
 
     public void setGlobalTime(int t){  if(this.globalTime < t) this.globalTime = t;}
 
+    /**
+     * A metódus felel az összes előforduló robot ütközés lebononyolításáért
+     * Robot - Robot | Robot - Kisrobot | Kisrobot - Robot | Kisrobot - Kisrobot
+     */
     private void collisionTest()
     {
-        System.out.println("#######################################################");
         ArrayList<Jump> actualJumps = new ArrayList<Jump>();
         for (Jump jump : jumps)
             if(jump.getTime()+jump.getPlayer().getSpeed() <  globalTime)
@@ -184,20 +182,24 @@ public class Game
                         jumps.remove(actualJumps.get(j));
                         actualJumps.remove(j);
                     }
-                    else
+                    else if((!actualJumps.get(i).getPlayer().isRobot() && !actualJumps.get(j).getPlayer().isRobot()))
                     {
-                        System.out.println("Takker-takkerral ütközés "+actualJumps.get(i).getPlayer().getName()+"-ra "+actualJumps.get(j).getPlayer().getName());
 
-                        if(isAnybodyThere(actualJumps.get(i).getTo()) == null)
-                            executeJump(jumps.get(i));
-                        Jump jmp = jumps.get(j);
-                        Point to = new Point(jmp.getPlayer().getPrevLocation());
-                        Jump tempJump = new Jump(jmp.getComponent(),Game.getInstance().getTime(),jmp.getPlayer(),to);
+                        if(jumps.size() != 0) {
+                            System.out.println("----"+jumps.toString());
+                            System.out.println("----"+i+" "+j);
+                            System.out.println("Takker-takkerral ütközés "+actualJumps.get(i).getPlayer().getName()+"-ra "+actualJumps.get(j).getPlayer().getName());
+                            Jump jmp = jumps.get(j);
+                            if (isAnybodyThere(actualJumps.get(i).getTo()) == null)
+                                executeJump(jumps.get(i));
+                            Point to = new Point(jmp.getPlayer().getPrevLocation());
+                            Jump tempJump = new Jump(jmp.getComponent(), Game.getInstance().getTime(), jmp.getPlayer(), to);
 
-                        if(isAnybodyThere(tempJump.getTo()) == null)
-                            executeJump(tempJump);
-                        jumps.remove(actualJumps.get(j));
-                        actualJumps.remove(j);
+                            if (isAnybodyThere(tempJump.getTo()) == null)
+                                executeJump(tempJump);
+                            jumps.remove(actualJumps.get(j));
+                            actualJumps.remove(j);
+                        }
                     }
 
                 }
@@ -247,17 +249,13 @@ public class Game
         }
         for (Jump j : actualJumps)
             executeJump(j);
-        System.out.println("#######################################################");
+       // System.out.println("#######################################################");
     }
 
-    private void removeDeadWallEs()
-    {
-        for(Player p : players)
-            if(!p.isRobot() && p.isDead()) {
-                players.remove(p);
-            }
-    }
-
+    /**
+     *
+     * Megnézzük, hogy az adott pozíción tartózkodik-e valaki
+     */
     private Player isAnybodyThere(Point location)
     {
         for (Player p : players)
@@ -268,6 +266,9 @@ public class Game
         return null;
     }
 
+    /**
+     * Csökkenti az oldaj életciklusát
+     */
     public void oilUpdate()
     {
         if(!oilList.isEmpty())
@@ -275,6 +276,9 @@ public class Game
                  oilList.get(i).tick();
     }
 
+    /**
+     * Törli az adott robotot a pályáról
+     */
     public void terminatePlayer(Player p)
     {
         if(!players.isEmpty()) {
@@ -286,6 +290,9 @@ public class Game
         }
     }
 
+    /**
+     * Törli az adott pályaelemet a pályáról
+     */
     public void terminateObject(Component obj)
     {
         map.setComponent(obj.location, new Ground(obj.location));
@@ -298,6 +305,10 @@ public class Game
         }
     }
 
+    /**
+     * Játék inicializálása, Játékos robotok elhelyezése a pályán
+     * @param level
+     */
     public  void createGame(int level)
     {
         map.load(level);
@@ -306,6 +317,9 @@ public class Game
         globalTime = 0;
     }
 
+    /**
+     * Ugrás végrehajtása, vele járó adminisztrációk elvégzése
+     */
     private void executeJump(Jump j)
     {
         Component currentCmp = map.getComponent(j.getTo());
@@ -318,11 +332,6 @@ public class Game
         jumps.remove(j);
     }
 
-    public ArrayList<Oil> getOilList()
-    {
-        return oilList;
-    }
-
-
+    public ArrayList<Oil> getOilList() { return oilList;}
     public void addOil(Oil o) {this.oilList.add(o);}
 }

@@ -5,6 +5,10 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 
+
+/**
+ * Ragacs pályaelem
+ */
 public class Glue extends Component
 {
     private int life;
@@ -16,6 +20,11 @@ public class Glue extends Component
         life = 2;
     }
 
+    /**
+     * Ragacsra lépés
+     * Játékos sebességének felezése
+     * Jelzés a View-nek a GUI frissítésről
+     */
     public  void steppedOnMe(Jump p)
     {
         System.out.println("Ragacsra léptek: " + p.getPlayer().getName() + p.getTo());
@@ -28,7 +37,20 @@ public class Glue extends Component
             if(player.getSpeed()<8)
                 player.setSpeed(player.getSpeed()*2);
             player.setNumStep(player.getNumStep()+1);
+            if(player.getNumGlue() <3 )
             player.setNumGlue(player.getNumGlue()+1);
+
+            if(player.getID() == 0)
+            {
+                View.getInstance().setGlue1("Glue: "+player.getNumGlue());
+                View.getInstance().setSpeed1("Speed: "+player.getSpeed());
+            }
+            else
+            {
+                View.getInstance().setGlue2("Glue: "+player.getNumGlue());
+                View.getInstance().setSpeed2("Speed: "+player.getSpeed());
+            }
+
         }
         life--;
         if(life == 0) Game.getInstance().terminateObject(this);

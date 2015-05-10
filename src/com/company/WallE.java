@@ -6,6 +6,10 @@ import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
+
+/**
+ * Takarító robot osztálya, felépítésében hasonlít a Human osztályra, azomban a lépés végrehajtása autonóm
+ */
 public class WallE extends Player
 {
 
@@ -23,7 +27,9 @@ public class WallE extends Player
 
     }
 
-
+    /**
+     * Az útvonalválasztásért és lépésért felelő metődus
+     */
     public  Jump step()
     {
         Oil target  = findNearestOil(Game.getInstance().getOilList());

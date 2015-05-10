@@ -1,9 +1,10 @@
 package com.company;
 
 import java.awt.*;
-import java.util.Date;
 
-
+/**
+ * Ugrás osztály - tárolja az ugrás részleteti: | Ki ugrott | mit rakna le | mikor ugrik | hova történne az ugrás
+ */
 public class Jump
 {
     private Component component;
