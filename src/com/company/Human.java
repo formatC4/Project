@@ -1,5 +1,9 @@
 package com.company;
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,12 +25,22 @@ public class Human extends Player {
         this.setSpeed(4);
         this.setNumStep(0);
         if(numberOfPlayers == 0)
-            this.setLocation(new Point(0,0));
+            this.setLocation(new Point(20,20));
         else
-            this.setLocation(new Point(5,0));
+            this.setLocation(new Point(10,10));
         ID = numberOfPlayers;
         numberOfPlayers++;
         this.isRobot = true;
+
+        try {
+            int i = getID()+1;
+            File f = new File("kepek/robot"+i+".png");
+            this.icon = ImageIO.read(f);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
     public int getID(){return this.ID;}
 
@@ -75,11 +89,16 @@ public class Human extends Player {
             return new Jump(null,Game.getInstance().getTime(),this,new Point(location.x+x,location.y+y));
         }
 
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
         System.out.println(name+" ("+location+") Merre lépnél? (le-S,fel-W,jobbra-D,balra-A");
         char dir = sc.next().toUpperCase().toCharArray()[0];
         System.out.println("Ha szeretnél letenni valamit: (olaj-O,ragacs-R,semmi-Bármi)");
         char cmp = sc.next().toUpperCase().toCharArray()[0];
+        */
+        char dir = Controller.getInstance().getKeyDirection(this);
+        dir = Character.toUpperCase(dir);
+        char cmp = Controller.getInstance().getKeyItem(this);
+        cmp = Character.toUpperCase(cmp);
         Point to = new Point(location);
 
 
@@ -102,11 +121,11 @@ public class Human extends Player {
         Component comp = null;
         switch (cmp)
         {
-            case 'O':
+            case 'Q':
                 if(numOil > 0) {comp = new Oil(location); this.numOil--; Game.getInstance().addOil((Oil)comp);
                 }
                 break;
-            case 'R': if(numGlue > 0) {comp = new Glue(location); this.numGlue--;}
+            case 'E': if(numGlue > 0) {comp = new Glue(location); this.numGlue--;}
                 break;
         }
         return new Jump(comp,Game.getInstance().getTime(),this,to);

@@ -1,9 +1,7 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.Scanner;
-/*EZ ITT EGY KOMMENT VIKTOR TÖRÖLD KI */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,11 +11,23 @@ public class Main {
     public Main()
     {
 
-        System.out.println("Milyen nehézségű játékot szeretnél?(1-3)");
 
-        Scanner sc = new Scanner(System.in);
-        int lvl = sc.nextInt();
-        Game.getInstance().createGame(lvl);
+
+
+        Object[] options = {"Hard","Medium","Easy"};
+        JFrame frame = new JFrame();
+        int n = JOptionPane.showOptionDialog(frame,
+                "Válassz nehézséget",
+                "Nehezség választás!",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
+        Game.getInstance().createGame(n);
+        View.getInstance().init(Game.getInstance().getJumps(),Game.getInstance().getMap(),Game.getInstance().getPlayers());
+        Controller.getInstance();
+
     }
 
 }

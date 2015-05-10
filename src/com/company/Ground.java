@@ -1,7 +1,9 @@
 package com.company;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 
 public class Ground extends Component
 {
@@ -20,6 +22,14 @@ public class Ground extends Component
         {
             Human player = (Human)p.getPlayer();
             player.setNumStep(player.getNumStep()+1);
+        }
+
+        try {
+
+            this.icon = ImageIO.read(new File("kepek/ground.png"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 

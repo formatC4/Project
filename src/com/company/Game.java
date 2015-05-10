@@ -24,6 +24,19 @@ public class Game
     }
 
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public ArrayList<Jump> getJumps() {
+        return jumps;
+    }
+
+
     public Game()
     {
         init();
@@ -41,7 +54,7 @@ public class Game
     public void debug()
     {
         System.out.println("--------------------------------------------------");
-        System.out.println("gt: "+globalTime);
+        System.out.println("gt: " + globalTime);
         System.out.println("LÉPÉSEK SZÁMA: " + jumps.size());
         for (Jump j : jumps)
             System.out.println(j);
@@ -58,8 +71,6 @@ public class Game
 
     public  void update()
     {
-        while (isRunning)
-        {
             System.out.println("????????????????????????????????");
             debug();
             for(int i=0;i<players.size();i++)
@@ -90,27 +101,22 @@ public class Game
                     break;
                 }
             }
-            globalTime++;/* új kör #yolo*/
             oilUpdate();
-            WallELauncher();
-        }
-        for (Player p : players)
-            if(!p.isDead() && p.isRobot)
-                System.out.println(p.getName() +" nyert! lépésszáma: "+((Human)p).getNumStep());
+
+
     }
+
 
     public void WallELauncher()
     {
-        //if(globalTime % 5 > 1 && !oilList.isEmpty())
-        if (globalTime==2)
-        {
+
             WallE w1 = new WallE("Takker1");
             WallE w2 = new WallE("Takker2");
-            w1.setLocation(new Point(7,0));
-            w2.setLocation(new Point(0,5));
+            w1.setLocation(new Point(5,5));
+            w2.setLocation(new Point(25,25));
             players.add(w1);
             players.add(w2);
-        }
+
 
     }
 
@@ -119,12 +125,14 @@ public class Game
         return globalTime;
     }
 
+    public void setGlobalTime(int t){  if(this.globalTime < t) this.globalTime = t;}
+
     private void collisionTest()
     {
         System.out.println("#######################################################");
         ArrayList<Jump> actualJumps = new ArrayList<Jump>();
         for (Jump jump : jumps)
-            if(jump.getTime()+jump.getPlayer().getSpeed() == globalTime)
+            if(jump.getTime()+jump.getPlayer().getSpeed() <  globalTime)
                 actualJumps.add(jump);
         if(actualJumps.isEmpty())
             return;
@@ -224,7 +232,9 @@ public class Game
 
                         p.kill();
                         executeJump(j);
-                        map.setComponent(p.getLocation(),new Oil(p.getLocation()));
+                        Oil o = new Oil(p.getLocation());
+                        this.oilList.add(o);
+                        map.setComponent(p.getLocation(),o);
                         break;
                     }
                     else
@@ -294,7 +304,6 @@ public class Game
         players.add(new Human("Player 1"));
         players.add(new Human("Player 2"));
         globalTime = 0;
-        update();
     }
 
     private void executeJump(Jump j)

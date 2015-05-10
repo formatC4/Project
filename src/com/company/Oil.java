@@ -1,7 +1,9 @@
 package com.company;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 
 public class Oil extends Component
 {
@@ -12,7 +14,13 @@ public class Oil extends Component
     {
         this.location = location;
         this.stepable = true;
-        timeLeft = 30;
+        timeLeft = 100;
+        try {
+            this.icon = ImageIO.read(new File("kepek/oil.png"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void tick()

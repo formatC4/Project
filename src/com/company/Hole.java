@@ -1,7 +1,9 @@
 package com.company;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 
 public class Hole extends Component
 {
@@ -9,6 +11,13 @@ public class Hole extends Component
     {
         this.location = location;
         this.stepable = true;
+
+        try {
+            this.icon = ImageIO.read(new File("kepek/hole.png"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
     public  void steppedOnMe(Jump p)
     {

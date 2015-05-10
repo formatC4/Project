@@ -1,7 +1,9 @@
 package com.company;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class WallE extends Player
@@ -12,6 +14,13 @@ public class WallE extends Player
         this.isRobot = false;
         setSpeed(4);
         this.name = name;
+        try {
+            this.icon = ImageIO.read(new File("kepek/walle.png"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 
@@ -19,7 +28,7 @@ public class WallE extends Player
     {
         Oil target  = findNearestOil(Game.getInstance().getOilList());
         if (target  == null) {
-           // kill();
+            kill();
             return null;
         }
 

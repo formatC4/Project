@@ -1,6 +1,7 @@
 package com.company;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Játékos ősosztály biztosítja a megfelelő tulajdonságot és setter/gettereket a Human örökös számára
@@ -8,7 +9,7 @@ import java.awt.*;
 public abstract class Player
 {
     protected Point location;
-    protected Image icon;
+    protected BufferedImage icon;
     protected boolean isDead;
     protected int speed;
     protected boolean isRobot;
@@ -32,7 +33,7 @@ public abstract class Player
         return icon;
     }
 
-    public void setIcon(Image icon) {
+    public void setIcon(BufferedImage icon) {
         this.icon = icon;
     }
 

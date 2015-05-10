@@ -1,6 +1,7 @@
 package com.company;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * 
@@ -8,7 +9,10 @@ import java.awt.*;
 public abstract class Component
 {
     protected boolean stepable;
-    protected Image icon;
+
+
+
+    protected BufferedImage icon;
     protected Point location;
 
 
@@ -16,6 +20,15 @@ public abstract class Component
 
     public  boolean getStepable(){
         return this.stepable;
+    }
+
+    public BufferedImage getIcon() {
+        return icon;
+    }
+
+    public Point getLocation()
+    {
+        return location;
     }
 
     public String toString()

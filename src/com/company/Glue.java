@@ -1,7 +1,9 @@
 package com.company;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 
 public class Glue extends Component
 {
@@ -30,6 +32,15 @@ public class Glue extends Component
         }
         life--;
         if(life == 0) Game.getInstance().terminateObject(this);
+
+        try {
+
+            this.icon = ImageIO.read(new File("kepek/glue.png"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public String toString()
