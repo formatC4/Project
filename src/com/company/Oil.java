@@ -55,16 +55,7 @@ public class Oil extends Component
             if(player.getNumOil() <5)
                 player.setNumOil(player.getNumOil()+1);
 
-            if(player.getID() == 0)
-            {
-                View.getInstance().setOil1("Oil: "+player.getNumOil());
-                View.getInstance().setSpeed1("Speed: "+player.getSpeed());
-            }
-            else
-            {
-                View.getInstance().setOil2("Oil: "+player.getNumOil());
-                View.getInstance().setSpeed2("Speed: "+player.getSpeed());
-            }
+
 
         }
         else

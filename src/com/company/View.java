@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.awt.Point;
+import java.awt.event.*;
 /**
  * A View osztály felel a játék ablakos megjelenítéséért, a kirajzolásért és annak frissítéséért
  */
@@ -28,41 +29,10 @@ public class View {
     JLabel step1;
     JLabel step2;
 
-    public void setSpeed2(String speed2) {
-        this.speed2.setText(speed2);
-    }
-
-    public void setOil2(String oil2) {
-        this.oil2.setText(oil2);
-    }
-
-    public void setGlue2(String glue2) {
-        this.glue2.setText(glue2);
-    }
-
-    public void setSpeed1(String speed1) {
-        this.speed1.setText(speed1);
-    }
-
-    public void setGlue1(String glue1) {
-        this.glue1.setText(glue1);
-    }
-
-    public void setOil1(String oil1) {
-        this.oil1.setText(oil1);
-    }
-
     public void setGlobaTime(String globaTime) {
         this.globaTime.setText(globaTime);
     }
 
-    public void setStep1(String step) {
-        this.step1.setText(step);
-    }
-
-    public void setStep2(String step) {
-        this.step2.setText(step);
-    }
 
     private static View instance;
 
@@ -109,12 +79,13 @@ public class View {
 
         JPanel controlPanel = new JPanel();
         box.add(globaTime);
+        box.add(Box.createRigidArea(new Dimension(0,30) ));
         box.add(Player1);
         box.add(glue1);
         box.add(oil1);
-        box.add(step1);
         box.add(speed1);
-        box.add(Box.createRigidArea(new Dimension(0,10) ));
+        box.add(step1);
+        box.add(Box.createRigidArea(new Dimension(0,20) ));
         box.add(Player2);
         box.add(glue2);
         box.add(oil2);
@@ -171,6 +142,24 @@ public class View {
             for (Player p : players)
             {
                 g.drawImage(p.getIcon(),(int)p.getLocation().getX()*20,(int)p.getLocation().getY()*20,20,20,null);
+                if(p.isRobot())
+                {
+                    Human player = (Human)p;
+                    if(player.getID() == 0)
+                    {
+                        glue1.setText("Glue: "+player.getNumGlue());
+                        oil1.setText("Oil: "+player.getNumOil());
+                        speed1.setText("Speed: " + player.getSpeed());
+                        step1.setText("Step: "+player.getNumStep());
+                    }
+                    else
+                    {
+                        glue2.setText("Glue: "+player.getNumGlue());
+                        oil2.setText("Oil: " + player.getNumOil());
+                        speed2.setText("Speed: " + player.getSpeed());
+                        step2.setText("Step: " + player.getNumStep());
+                    }
+                }
             }
         }
     }
@@ -181,24 +170,34 @@ public class View {
     public void GameOver()
     {
         Object[] options = {"Ok"};
-        Player player = null;
+        Human player = null;
         for (Player p : Game.getInstance().getPlayers())
         {
             if(!p.isDead() && p.isRobot) {
-                player = p;
-                break;
+                if(player!= null)
+                {
+                    if(player.getNumStep()<((Human)p).getNumStep())
+                        player = (Human)p;
+                    else if(player.getNumStep()==((Human)p).getNumStep())
+                        player = null;
+                }
+                else
+                    player = (Human)p;
             }
         }
 
-        JFrame frame = new JFrame();
-        int n = JOptionPane.showOptionDialog(frame,
-                player.getName()+" Győzött",
+        String str = player!=null ? player.getName()+" Győzött" : "Döntetlen";
+        JFrame dialogFrame = new JFrame();
+        int n = JOptionPane.showOptionDialog(dialogFrame,
+                str,
                 "Game Over!",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
                 options[0]);
+        frame.dispose();
+
     }
 
 

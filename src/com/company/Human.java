@@ -123,27 +123,15 @@ public class Human extends Player {
                     comp = new Oil(location);
                     this.numOil--;
                     Game.getInstance().addOil((Oil)comp);
-                    if(this.getID() == 0)
-                        View.getInstance().setOil1("Oil: "+this.numOil);
-                    else if(this.getID() == 1)
-                        View.getInstance().setOil2("Oil: " + this.numOil);
                 }
                 break;
             case 'E': if(numGlue > 0)
                 {
                     comp = new Glue(location);
                     this.numGlue--;
-                    if(this.getID() == 0)
-                        View.getInstance().setGlue1("Glue: " + this.numGlue);
-                    else if(this.getID() == 1)
-                        View.getInstance().setGlue2("Glue: "+this.numGlue);
                 }
                 break;
         }
-        if(this.getID() == 0)
-            View.getInstance().setStep1("Steps: " + this.getNumStep());
-        else if(this.getID() == 1)
-            View.getInstance().setStep2("Steps: " + this.getNumStep());
 
         return new Jump(comp,Game.getInstance().getTime(),this,to);
     }

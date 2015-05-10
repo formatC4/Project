@@ -16,7 +16,7 @@ public class WallE extends Player
     public WallE(String name)
     {
         this.isRobot = false;
-        setSpeed(4);
+        setSpeed(8);
         this.name = name;
         try {
             this.icon = ImageIO.read(new File("kepek/walle.png"));

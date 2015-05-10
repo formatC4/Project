@@ -70,7 +70,13 @@ public class Controller {
      */
     public void Tick()
     {
-        if(Game.getInstance().getPlayers().size() < 2)
+        int i=0;
+        for(Player p: Game.getInstance().getPlayers() )
+        {
+            if(p.isRobot())
+                i++;
+        }
+        if(i<2 || Game.getInstance().getTime()>1000)
             EndGame();
 
         Game.getInstance().setGlobalTime(Game.getInstance().getTime()+1);
