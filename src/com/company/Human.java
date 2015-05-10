@@ -64,9 +64,6 @@ public class Human extends Player {
         this.numGlue = numGlue;
     }
 
-    public int getSlideCount() {
-        return slideCount;
-    }
 
     public void setSlideCount(int slideCount) {
         this.slideCount = slideCount;

@@ -1,6 +1,5 @@
 package com.company;
 
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -307,7 +306,7 @@ public class Game
 
     /**
      * Játék inicializálása, Játékos robotok elhelyezése a pályán
-     * @param level
+     * @param level: nehézség paramétere
      */
     public  void createGame(int level)
     {

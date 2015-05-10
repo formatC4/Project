@@ -188,7 +188,7 @@ public class View {
 
         String str = player!=null ? player.getName()+" Győzött" : "Döntetlen";
         JFrame dialogFrame = new JFrame();
-        int n = JOptionPane.showOptionDialog(dialogFrame,
+        JOptionPane.showOptionDialog(dialogFrame,
                 str,
                 "Game Over!",
                 JOptionPane.YES_NO_CANCEL_OPTION,
